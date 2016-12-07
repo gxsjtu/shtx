@@ -45,7 +45,8 @@ namespace Service
                         Name = o.KeyName,
                         Desc = o.Description
                     }).ToList();
-                    cataLogCache[channelId] = catalogs;
+                    //cataLogCache[channelId] = catalogs;
+                    cataLogCache.Add(channelId,catalogs);
                     return catalogs;
                 }
             }
@@ -86,7 +87,8 @@ namespace Service
                 using (var ctx = new ShtxSms2008Entities())
                 {
                     var list = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && (o.IsDefault ?? false)).Select(o => o.GroupID).ToList();
-                    defaultAppGroupsCache[flag] = list;
+                    //defaultAppGroupsCache[flag] = list;
+                    defaultAppGroupsCache.Add(flag,list);
                     return list;
                 }
             }
@@ -104,7 +106,8 @@ namespace Service
                 using (var ctx = new ShtxSms2008Entities())
                 {
                     var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp).ToList();
-                    marketGroupForAppCache[flag] = groups;
+                    marketGroupForAppCache.Add(flag, groups);
+                    //marketGroupForAppCache[flag] = groups;
                     return groups;
                 }
             }
@@ -122,7 +125,8 @@ namespace Service
                 using (var ctx = new ShtxSms2008Entities())
                 {
                     var markets = ctx.Markets.Where(o => o.GroupID == groupId).ToList();
-                    marketCache[groupId] = markets;
+                    //marketCache[groupId] = markets;
+                    marketCache.Add(groupId,markets);
                     return markets;
                 }
             }

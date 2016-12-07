@@ -18,15 +18,15 @@ namespace Service
             {
                 //DateTime end = DateTime.Today.AddDays(1);
                 //DateTime start = end.AddDays(-2);
-                var log = ctx.App_Log.FirstOrDefault(o => o.mobile.Contains(mobile) && o.ErrCode == "1");
-                if (log != null)
-                {
-                    var tel = log.mobile;
-                    var count = ctx.App_Log.Count(o => o.mobile == tel && o.ErrCode == "1");
+                //var log = ctx.App_Log.FirstOrDefault(o => o.mobile.Contains(mobile) && o.ErrCode == "1");
+                //if (log != null)
+                //{
+                    //var tel = log.mobile;
+                    var count = ctx.App_Log.Count(o => o.mobile.Contains(mobile) && o.ErrCode == "1");
                     if (count > 0)
-                        list = ctx.App_Log.Where(o => o.mobile == tel && o.ErrCode == "1").OrderByDescending(o => o.Date).Take(count < 30 ? count : 30)
+                        list = ctx.App_Log.Where(o => o.mobile.Contains(mobile) && o.ErrCode == "1").OrderByDescending(o => o.Date).Take(count < 30 ? count : 30)
                             .Select(o => new InboxVM { Id = o.ID, Date = o.Date, Msg = o.Msg, Url = o.Url }).ToList();
-                }
+                //}
             }
             return list;
         }
