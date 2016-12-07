@@ -13,6 +13,7 @@ public class DownloadCountHandler : IHttpHandler {
         {
             new Service.DownloadCountService().addCount();
         }
+        //Service.MongoDBService.GetHostoryPrices(15063, Convert.ToDateTime("2016-11-01"), Convert.ToDateTime("2016-12-10"));
     }
  
     public bool IsReusable {

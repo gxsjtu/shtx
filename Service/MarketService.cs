@@ -15,7 +15,9 @@ namespace Service
             var list = new List<MarketGroupVM>();
             using (var ctx = new ShtxSms2008Entities())
             {
-                var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                //change:
+                //var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                var groups = CacheService.GetMarketGroupForApp(flag);
                 foreach (var group in groups)
                 {
                     var groupId = group.GroupID;
@@ -41,7 +43,9 @@ namespace Service
             var xhMarkets = new Dictionary<int, string>();
             using (var ctx = new ShtxSms2008Entities())
             {
-                var groups = ctx.XHMarketGroups.Where(o => (o.Flag == type) && o.IsForApp).ToList();
+                //change:
+                //var groups = ctx.XHMarketGroups.Where(o => (o.Flag == type) && o.IsForApp).ToList();
+                var groups = CacheService.GetMarketGroupForApp(type).ToList();
                 CustomerBase cb = ctx.CustomerBases.FirstOrDefault(o => o.Tel.Contains(mobile) && o.SendInterFace == 102);
                 if (cb != null)
                 {
@@ -49,7 +53,9 @@ namespace Service
 
                     foreach (var group in groups)
                     {
-                        var markets = ctx.Markets.Where(o => o.GroupID == group.GroupID).ToList();
+                        //change:
+                        //var markets = ctx.Markets.Where(o => o.GroupID == group.GroupID).ToList();
+                        var markets = CacheService.GetMarketByGroupId(group.GroupID).ToList();
                         foreach (var m in markets)
                         {
                             xhmarketIds.Add(m.MarketId);
@@ -84,15 +90,21 @@ namespace Service
                     listOrder.AddRange(ctx.MyAppGroups.Where(o => o.tel == mobile && o.Flag == flag).OrderByDescending(o => o.DisplayOrder).Select(o => o.GroupID));
                     if (listOrder.Count == 0)
                     {
-                        defaultOrder.AddRange(ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && (o.IsDefault ?? false)).Select(o => o.GroupID));
+                        //change:
+                        //defaultOrder.AddRange(ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && (o.IsDefault ?? false)).Select(o => o.GroupID));
+                        defaultOrder.AddRange(CacheService.GetGroupsForApp(flag));
                     }
                 }
-                var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                //change:
+                //var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                var groups = CacheService.GetMarketGroupForApp(flag);
                 foreach (var group in groups)
                 {
                     var groupId = group.GroupID;
                     var vm = new MarketGroupVM() { Id = groupId, Name = group.GroupName };
-                    var markets = ctx.Markets.Where(o => o.GroupID == groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
+                    //change:
+                    //var markets = ctx.Markets.Where(o => o.GroupID == groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
+                    var markets = CacheService.GetMarketByGroupId(groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
                     vm.Market = markets;
                     vm.inBucket = "false";
                     if (string.IsNullOrWhiteSpace(mobile))

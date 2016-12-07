@@ -18,3 +18,12 @@ C:\Users\lvb\Desktop\tongxin_news\Model\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\lvb\Desktop\tongxin_news\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 C:\Users\lvb\Desktop\tongxin_news\Model\obj\Debug\Model.dll
 C:\Users\lvb\Desktop\tongxin_news\Model\obj\Debug\Model.pdb
+D:\shtx\Model\bin\Debug\Model.dll.config
+D:\shtx\Model\bin\Debug\Model.dll
+D:\shtx\Model\bin\Debug\Model.pdb
+D:\shtx\Model\bin\Debug\EntityFramework.dll
+D:\shtx\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\shtx\Model\bin\Debug\EntityFramework.xml
+D:\shtx\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\shtx\Model\obj\Debug\Model.dll
+D:\shtx\Model\obj\Debug\Model.pdb

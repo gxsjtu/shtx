@@ -40,7 +40,9 @@ namespace Service
                     var now = DateTime.Today;
                     //DateTime start = now.AddDays(-6);
                     //DateTime end = now.AddDays(1);
-                    var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).Select(o => o.ProductId).Distinct().ToList();
+                    //change:
+                    //var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).Select(o => o.ProductId).Distinct().ToList();
+                    var products = CacheService.GetSmsProductByMarketId(marketId).Select(o => o.ProductId).Distinct().ToList();
                     var orders = ctx.Gps.Where(o => o.Tel == mobile).Select(o => o.ProductID).Distinct().ToList();
                     //var pingluns = new List<AppPingLunVM>();
 
