@@ -1,2 +1,4 @@
 bin/
 obj/
+*.dll
+Back/Bin/Model.dll

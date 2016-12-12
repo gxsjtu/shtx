@@ -94,6 +94,7 @@ namespace Service
             }
         }
 
+        //排除102和103的group
         private static Dictionary<int, List<XHMarketGroup>> marketGroupForAppCache = new Dictionary<int,List<XHMarketGroup>>();
         public static List<XHMarketGroup> GetMarketGroupForApp(int flag)
         { 
@@ -106,6 +107,11 @@ namespace Service
                 using (var ctx = new ShtxSms2008Entities())
                 {
                     var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp).ToList();
+                    var g = groups.Where(o => o.GroupID == 102 || o.GroupID == 103).ToList();
+                    foreach (var item in g)
+                    {
+                        groups.Remove(item);
+                    }
                     marketGroupForAppCache.Add(flag, groups);
                     //marketGroupForAppCache[flag] = groups;
                     return groups;

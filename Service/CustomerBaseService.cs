@@ -21,8 +21,8 @@ namespace Service
                 //电话号码不正确
                 return false;
             }
-            using (TransactionScope tran = new TransactionScope())
-            {
+            //using (TransactionScope tran = new TransactionScope())
+            //{
                 using (var ctx = new ShtxSms2008Entities())
                 {
                     try
@@ -83,7 +83,7 @@ namespace Service
                             }
                             ctx.SaveChanges();
 
-                            tran.Complete();
+                            //tran.Complete();
 
 
 
@@ -94,7 +94,7 @@ namespace Service
                     {
 
                     }
-                }
+                //}
             }
 
             if (flag)

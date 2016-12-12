@@ -8,3 +8,13 @@ D:\P4_Workspace\Workspace\DEV\SourceCode\tongxin_news\Model\bin\Release\EntityFr
 D:\P4_Workspace\Workspace\DEV\SourceCode\tongxin_news\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
 D:\P4_Workspace\Workspace\DEV\SourceCode\tongxin_news\Model\obj\Release\Model.dll
 D:\P4_Workspace\Workspace\DEV\SourceCode\tongxin_news\Model\obj\Release\Model.pdb
+D:\shtx\Model\bin\Release\Model.dll.config
+D:\shtx\Model\bin\Release\Model.dll
+D:\shtx\Model\bin\Release\Model.pdb
+D:\shtx\Model\bin\Release\EntityFramework.dll
+D:\shtx\Model\bin\Release\EntityFramework.SqlServer.dll
+D:\shtx\Model\bin\Release\EntityFramework.xml
+D:\shtx\Model\bin\Release\EntityFramework.SqlServer.xml
+D:\shtx\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
+D:\shtx\Model\obj\Release\Model.dll
+D:\shtx\Model\obj\Release\Model.pdb

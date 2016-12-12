@@ -34,6 +34,12 @@
     </AssociationSet>
     <EntitySet Name="App_user" EntityType="ShtxSms2008Model.App_user" />
     <EntitySet Name="SmsRoles" EntityType="ShtxSms2008Model.SmsRole" />
+    <EntitySet Name="ApkDownloads" EntityType="ShtxSms2008Model.ApkDownload" />
+    <EntitySet Name="MyAppGroups" EntityType="ShtxSms2008Model.MyAppGroup" />
+    <AssociationSet Name="FK_MyAppGroup_XHMarketGroup" Association="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup">
+      <End Role="XHMarketGroup" EntitySet="XHMarketGroups" />
+      <End Role="MyAppGroup" EntitySet="MyAppGroups" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CustomerBase">
     <Key>
@@ -117,6 +123,9 @@
     <Property Type="String" Name="GroupName" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="DateTime" Name="AddDate" Precision="3" />
     <Property Type="Int32" Name="Flag" />
+    <Property Type="Boolean" Name="IsForApp" Nullable="false" />
+    <Property Type="Boolean" Name="IsDefault" />
+    <NavigationProperty Name="MyAppGroups" Relationship="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup" FromRole="XHMarketGroup" ToRole="MyAppGroup" />
   </EntityType>
   <EntityType Name="weixin_user">
     <Key>
@@ -184,6 +193,9 @@
     <Property Type="String" Name="SName" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="TaxIncluded" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="Boolean" Name="IsWeixinVisible" Nullable="false" />
+    <Property Type="String" Name="spec" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="parentName" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Gps_Market">
     <End Type="ShtxSms2008Model.Market" Role="Market" Multiplicity="0..1" />
@@ -218,6 +230,9 @@
     <Property Type="String" Name="devicetoken" MaxLength="70" FixedLength="false" Unicode="true" />
     <Property Type="Int32" Name="salt" />
     <Property Type="DateTime" Name="updatedate" Precision="3" />
+    <Property Type="Boolean" Name="isSound" />
+    <Property Type="Int32" Name="PhoneType" />
+    <Property Type="Int32" Name="PrePhoneType" />
   </EntityType>
   <EntityType Name="CataLog">
     <Key>
@@ -284,7 +299,9 @@
     <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
     <NavigationProperty Name="Province" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Supply" ToRole="Province" />
     <NavigationProperty Name="Images" Relationship="ShtxSms2008Model.FK_Image_Supply" FromRole="Supply" ToRole="Image" />
-    <Property Name="isChecked" Type="Boolean" Nullable="false" />
+    <Property Name="isChecked" Type="Boolean" />
+    <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Price" MaxLength="50" Unicode="true" FixedLength="false" />
   </EntityType>
   <Association Name="FK_Supply_Province">
     <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="1" />
@@ -327,4 +344,34 @@
     <Property Type="Byte" Name="RoleType" />
     <Property Type="String" Name="Colligate" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="ApkDownload">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="downloadtime" Precision="3" />
+  </EntityType>
+  <EntityType Name="MyAppGroup">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="GroupID" Nullable="false" />
+    <Property Type="String" Name="tel" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="DisplayOrder" />
+    <NavigationProperty Name="XHMarketGroup" Relationship="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup" FromRole="MyAppGroup" ToRole="XHMarketGroup" />
+    <Property Type="Int32" Name="Flag" />
+  </EntityType>
+  <Association Name="FK_MyAppGroup_XHMarketGroup">
+    <End Type="ShtxSms2008Model.XHMarketGroup" Role="XHMarketGroup" Multiplicity="1" />
+    <End Type="ShtxSms2008Model.MyAppGroup" Role="MyAppGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="XHMarketGroup">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="MyAppGroup">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

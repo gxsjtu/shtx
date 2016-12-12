@@ -80,6 +80,8 @@
     <EntitySetMapping Name="XHMarketGroups">
       <EntityTypeMapping TypeName="ShtxSms2008Model.XHMarketGroup">
         <MappingFragment StoreEntitySet="XHMarketGroup">
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="IsForApp" ColumnName="IsForApp" />
           <ScalarProperty Name="Flag" ColumnName="Flag" />
           <ScalarProperty Name="AddDate" ColumnName="AddDate" />
           <ScalarProperty Name="GroupName" ColumnName="GroupName" />
@@ -138,6 +140,9 @@
     <EntitySetMapping Name="SmsProducts">
       <EntityTypeMapping TypeName="ShtxSms2008Model.SmsProduct">
         <MappingFragment StoreEntitySet="SmsProduct">
+          <ScalarProperty Name="parentName" ColumnName="parentName" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="spec" ColumnName="spec" />
           <ScalarProperty Name="IsWeixinVisible" ColumnName="IsWeixinVisible" />
           <ScalarProperty Name="TaxIncluded" ColumnName="TaxIncluded" />
           <ScalarProperty Name="SName" ColumnName="SName" />
@@ -174,6 +179,9 @@
     <EntitySetMapping Name="AppCustomerTokens">
       <EntityTypeMapping TypeName="ShtxSms2008Model.AppCustomerToken">
         <MappingFragment StoreEntitySet="AppCustomerToken">
+          <ScalarProperty Name="PrePhoneType" ColumnName="PrePhoneType" />
+          <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+          <ScalarProperty Name="isSound" ColumnName="isSound" />
           <ScalarProperty Name="updatedate" ColumnName="updatedate" />
           <ScalarProperty Name="salt" ColumnName="salt" />
           <ScalarProperty Name="devicetoken" ColumnName="devicetoken" />
@@ -220,6 +228,8 @@
     <EntitySetMapping Name="Supplies">
       <EntityTypeMapping TypeName="ShtxSms2008Model.Supply">
         <MappingFragment StoreEntitySet="Supply">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Creater" ColumnName="Creater" />
           <ScalarProperty Name="isChecked" ColumnName="isChecked" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="ProviceID" ColumnName="ProviceID" />
@@ -251,6 +261,25 @@
           <ScalarProperty Name="RoleDesc" ColumnName="RoleDesc" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApkDownloads">
+      <EntityTypeMapping TypeName="ShtxSms2008Model.ApkDownload">
+        <MappingFragment StoreEntitySet="ApkDownload">
+          <ScalarProperty Name="downloadtime" ColumnName="downloadtime" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MyAppGroups">
+      <EntityTypeMapping TypeName="ShtxSms2008Model.MyAppGroup">
+        <MappingFragment StoreEntitySet="MyAppGroup">
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
