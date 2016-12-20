@@ -21,11 +21,11 @@ namespace Service
                 //var log = ctx.App_Log.FirstOrDefault(o => o.mobile.Contains(mobile) && o.ErrCode == "1");
                 //if (log != null)
                 //{
-                    //var tel = log.mobile;
-                    var count = ctx.App_Log.Count(o => o.mobile.Contains(mobile) && o.ErrCode == "1");
-                    if (count > 0)
-                        list = ctx.App_Log.Where(o => o.mobile.Contains(mobile) && o.ErrCode == "1").OrderByDescending(o => o.Date).Take(count < 30 ? count : 30)
-                            .Select(o => new InboxVM { Id = o.ID, Date = o.Date, Msg = o.Msg, Url = o.Url }).ToList();
+                //var tel = log.mobile;
+                var count = ctx.App_Log.Count(o => o.mobile == mobile && o.ErrCode == "1");
+                if (count > 0)
+                    list = ctx.App_Log.Where(o => o.mobile == mobile && o.ErrCode == "1").OrderByDescending(o => o.Date).Take(count < 30 ? count : 30)
+                        .Select(o => new InboxVM { Id = o.ID, Date = o.Date, Msg = o.Msg, Url = o.Url }).ToList();
                 //}
             }
             return list;
@@ -55,13 +55,9 @@ namespace Service
             var list = new List<InboxVM>();
             using (var ctx = new MetalSmsSendEntities())
             {
-                var log = ctx.App_Log.FirstOrDefault(o => o.mobile.Contains(mobile) && o.ErrCode == "1");
-                if (log != null)
-                {
-                    var tel = log.mobile;
-                    list = ctx.App_Log.Where(o => o.mobile == tel && o.ErrCode == "1" && o.Date > date).OrderByDescending(o => o.Date)
+                list = ctx.App_Log.Where(o => o.mobile == mobile && o.ErrCode == "1" && o.Date > date).OrderByDescending(o => o.Date)
                         .Select(o => new InboxVM { Id = o.ID, Date = o.Date, Msg = o.Msg, Url = o.Url }).ToList();
-                }
+
             }
             return list;
         }
@@ -72,16 +68,11 @@ namespace Service
             var list = new List<InboxVM>();
             using (var ctx = new MetalSmsSendEntities())
             {
-                var log = ctx.App_Log.FirstOrDefault(o => o.mobile.Contains(mobile) && o.ErrCode == "1");
-                if (log != null)
+                var count = ctx.App_Log.Count(o => o.mobile == mobile && o.ErrCode == "1" && o.Date < date);
+                if (count > 0)
                 {
-                    var tel = log.mobile;
-                    var count = ctx.App_Log.Count(o => o.mobile == tel && o.ErrCode == "1" && o.Date < date);
-                    if (count > 0)
-                    {
-                        list = ctx.App_Log.Where(o => o.mobile == tel && o.ErrCode == "1" && o.Date < date).OrderByDescending(o => o.Date)
-                            .Take(count > 20 ? 20 : count).Select(o => new InboxVM { Id = o.ID, Date = o.Date, Msg = o.Msg, Url = o.Url }).ToList();
-                    }
+                    list = ctx.App_Log.Where(o => o.mobile == mobile && o.ErrCode == "1" && o.Date < date).OrderByDescending(o => o.Date)
+                        .Take(count > 20 ? 20 : count).Select(o => new InboxVM { Id = o.ID, Date = o.Date, Msg = o.Msg, Url = o.Url }).ToList();
                 }
             }
             return list;
